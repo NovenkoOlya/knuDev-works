@@ -1,0 +1,125 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.header-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+.header-mark {
+    display: inline-flex;
+    justify-content: flex-end;
+    width: 45rem;
+    text-align: center;
+}
+
+.mark-score {
+    background-color: #801BEC;
+    padding: 0.125rem 0.313rem;
+    border-radius: 0.313rem;
+    color: #FFFFFF;
+    text-align: right;
+}
+
+h1 {
+    color: #801BEC;
+    text-align: center;
+}
+
+.main-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.quiz-list {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.quiz-question {
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border-color: #801BEC;
+    height: 4rem;
+    /* transition: height 0.5s ease-out; */
+    width: 45rem;
+    margin: 1rem;
+}
+
+.answer-option {
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: visibility 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.button-container {
+    display: flex;
+}
+
+.send-button, .update-button {
+    margin: 1rem;
+    border-radius: 3rem;
+    border: none;
+    background-color: #801BEC;
+    color: white;
+    font-size: 1rem;
+    padding: 1rem;
+    width: 10rem;
+    cursor: pointer;
+}
+
+.send-button:hover, .update-button:hover {
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
+.quiz-question.active {
+    height: auto;
+}
+
+.quiz-question.showOptions {
+    height: 9rem;
+}
+
+.answer-option.active {
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.answer-option.correct {
+    background-color: rgb(127, 255, 131);
+    transition: background-color 0.5s ease-in-out;
+}
+
+.answer-option.incorrect {
+    background-color: rgb(255, 136, 127);
+    transition: background-color 0.5s ease-in-out;
+}
+
+.time-left {
+    font-weight: bold;
+    color: green;
+    transition: color 1s ease-in-out;
+}
+.time-left.warning {
+    color: red;
+}
