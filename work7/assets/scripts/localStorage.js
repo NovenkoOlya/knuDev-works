@@ -1,14 +1,24 @@
-import { btnRefresh } from './dom.js'
-let cardsList = []
+export let cardsList = []
+const EXPIRATION_KEY = 'cardsListExpiration'
+const EXPIRATION_TIME = 10 * 60 * 1000 
 
-const addListItem = () => {
-    list.innerHTML = ''
+export const loadLocal = () => {
+    const expirationTime = localStorage.getItem(EXPIRATION_KEY)
+    if (expirationTime && Date.now() > expirationTime) {
+        clearLocal()
+    }
 
-    toDo.sort((a, b) => a.isChecked - b.isChecked)
+    const storedData = localStorage.getItem('cardsList')
+    cardsList = storedData ? JSON.parse(storedData) : []
+}
 
-    toDo.forEach((item, index) => {
-        list.innerHTML += createElement(item, index)
-    })
+export const updateLocal = () => {
+    localStorage.setItem('cardsList', JSON.stringify(cardsList))
+    localStorage.setItem(EXPIRATION_KEY, Date.now() + EXPIRATION_TIME)
+}
 
-    updateLocal()
+export const clearLocal = () => {
+    localStorage.removeItem('cardsList')
+    localStorage.removeItem(EXPIRATION_KEY)
+    cardsList = []
 }

@@ -8,9 +8,11 @@ export function processWeatherData(weatherData) {
 
         if (!dailyForecast[date]) {
             dailyForecast[date] = {
+                temp: item.main.temp,
                 minTemp: item.main.temp_min,
                 maxTemp: item.main.temp_max,
                 weatherMain: item.weather[0].main,
+                weatherDescription: item.weather[0].description,
                 windSpeed: item.wind.speed,
                 windGusts: item.wind.gust,
                 humidity: item.main.humidity,
@@ -18,11 +20,14 @@ export function processWeatherData(weatherData) {
                 cloudiness: item.clouds.all,
                 visibility: item.visibility,
                 pressure: item.pressure,
-                icon: item.weather[0].icon
+                time: item.dt_txt,
+                icon: item.weather[0].icon,
+                hours: [item]
             }
         } else {
             dailyForecast[date].minTemp = Math.min(dailyForecast[date].minTemp, item.main.temp_min)
             dailyForecast[date].maxTemp = Math.max(dailyForecast[date].maxTemp, item.main.temp_max)
+            dailyForecast[date].hours.push(item)
         }
     })
 

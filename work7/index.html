@@ -14,12 +14,21 @@
         <h1>Weather Forecast</h1>
     </header>
     <main>
+        <div class="language-toggle">
+            <button id="lang-switch">EN</button>
+        </div>
         <div class="search-container">
             <input id="input-city" type="text" placeholder="Search Location...">
             <button id="search-btn">
                 🔍
             </button>
         </div>
+        <label id="select-unit" for="enableUnits">Select unit:</label>
+        <select name="enableUnits" id="enable-units">
+            <option value="default">--Please choose an option--</option>
+            <option value="metric">metric</option>
+            <option value="imperial">imperial</option>
+        </select>
         <button id="btn-refresh">Refresh</button>
         <div id="weather-summary">
                 
@@ -34,9 +43,16 @@
             </div>
             </div>
         </div>
+        <div class="card-inner">
+           <div id="hours-forecast">
+
+            </div> 
+            <canvas id="temperatureChart"></canvas>
+        </div>
     </main>
     <footer></footer>
     
     <script src="./assets/scripts/main.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
