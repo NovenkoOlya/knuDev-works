@@ -101,6 +101,13 @@ html, body {
     padding: -0.5rem 0;
 }
 
+#last-update-text {
+    font-size: 0.9rem;
+    color: gray;
+    text-align: center;
+    margin-top: 10px;
+}
+
 #weather-summary {
     display: flex;
     justify-content: center;

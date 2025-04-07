@@ -1,6 +1,6 @@
 import { processWeatherData } from "./weatherService.js"
 import { inputCity, updateWeatherUI, btnSend, outputCurrentDayWeather,
-     btnRefresh, refreshOutput, langChange, enableUnits } from './dom.js'
+     btnRefresh, refreshOutput, langChange, enableUnits, showLastUpdateTime } from './dom.js'
 import { fetchWeatherData, fetchTodayWeather } from './api.js'
 import { cardsList, updateLocal, loadLocal, clearLocal } from './localStorage.js'
 import { changeLanguage } from './changeLanguage.js'
@@ -25,6 +25,7 @@ async function performService(city) {
 
         cardsList.push({ city, dailyForecast, todayWeather })
         updateLocal()
+        setInterval(showLastUpdateTime, 1000)
     } catch (error) {
         console.error("Error retrieving weather:", error)
         alert("Could not get weather forecast.")
@@ -53,6 +54,7 @@ function handleWeatherRequest() {
 btnSend.addEventListener("click", handleWeatherRequest)
 
 btnRefresh.addEventListener("click", () => {
+    performService("Kyiv")
     clearLocal()
     refreshOutput()
 })
@@ -96,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     loadLocal()
+    setInterval(showLastUpdateTime, 1000)
 
     if (cardsList.length > 0) {
         console.log("Data from local storage loaded:", cardsList)
@@ -106,6 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     } else {
         console.log("There is no data saved in localStorage.")
+        performService("Kyiv")
     }
 })
 

@@ -94,9 +94,9 @@ export function outputCurrentDayWeather(todayWeather) {
   ? todayWeather.wind.speed + ` ${windSpeedUnit}`
   : todayWeather.wind.speed + ` ${windSpeedUnit}`
 
-  let windGust = enableUnits.value === "metric" 
-  ? todayWeather.wind.gust + ` ${windSpeedUnit}` 
-  : todayWeather.wind.gust + ` ${windSpeedUnit}`
+  let windGust = todayWeather.wind.gust !== undefined && todayWeather.wind.gust !== null
+  ? todayWeather.wind.gust + ` ${windSpeedUnit}`
+  : "N/A"
 
   let visibilityUnit = langChange.textContent === "UA" 
   ? (enableUnits.value === "metric" ? "км" : "милі") 
@@ -125,7 +125,7 @@ export function outputCurrentDayWeather(todayWeather) {
             <p class="weather-condition">${langChange.textContent === "UA" 
               ? "Швидкість вітру:" : "Wind Speed:"} ${windSpeed}</p>
             <p class="weather-condition">${langChange.textContent === "UA" 
-              ? "Пориви вітру:" : "Gusts of Wind:"} ${windGust || "N/A"}</p>
+              ? "Пориви вітру:" : "Gusts of Wind:"} ${windGust}</p>
             <p class="weather-condition">${langChange.textContent === "UA" 
               ? "Вологість:" : "Humidity:"} ${todayWeather.main.humidity}%</p>
             <p class="weather-condition">${langChange.textContent === "UA" 
@@ -236,3 +236,18 @@ function setupCardClickHandlers(dailyForecast) {
   })
 }
 
+export const lastUpdateElem = document.getElementById("last-update-time")
+
+export function showLastUpdateTime() {
+  const lastUpdateTime = localStorage.getItem("lastUpdateTime")
+
+  if (lastUpdateTime) {
+      const secondsAgo = Math.floor((Date.now() - Number(lastUpdateTime)) / 1000)
+      const text = langChange.textContent === "UA" 
+        ? `Останнє оновлення ${secondsAgo} секунд тому`
+        : `Last updated ${secondsAgo} seconds ago`
+      lastUpdateElem.textContent = text
+  } else {
+      lastUpdateElem.textContent = ""
+  }
+}
